@@ -74,14 +74,40 @@ const header = () => {
         };
     }, [isLangOpen, isCurrencyOpen]);
 
+    // 1. État pour gérer l'ouverture/fermeture du menu mobile
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
+
+    // Fonction de bascule pour le bouton
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    // 2. Logique de fermeture au clic extérieur (useEffect)
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+
+            if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsMenuOpen(!isMenuOpen);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isMenuOpen]);
+
+
     return (
         <div className="header">
-            <div className="part1 flex justify-between items-center px-20 py-5">
+            <div className="part1 flex justify-between items-center px-4 sm:px-10 lg:px-15 xl:px-20 py-5">
 
                 {/* Section Mon Compte */}
                 <div className="my-account w-75">
                     <a href={lmsUrl} target="_blank" className="cursor-pointer" rel="noopener noreferrer">
-                        <h5 className="flex items-center uppercase text-[18px]">
+                        <h5 className="flex items-center uppercase text-[15px] sm:text-[18px]">
                             <UserCircleIcon size={28} className="mr-2" /> {t('my_account')}
                         </h5>
                     </a>
@@ -93,7 +119,7 @@ const header = () => {
                     {/* Sélecteur de Devise */}
                     <div className="relative" ref={currencyRef}>
                         <p
-                            className="flex items-center cursor-pointer text-[18px]"
+                            className="flex items-center cursor-pointer text-[14px] sm:text-[18px]"
                             onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
                         >
                             <Money01Icon size={22} className="money rounded-xl p-3 mr-2" />
@@ -107,7 +133,7 @@ const header = () => {
                                 {currencies.map((currency) => (
                                     <p
                                         key={currency.code}
-                                        className="currency p-2 text-[18px] cursor-pointer"
+                                        className="currency p-2 text-[14px] sm:text-[18px] cursor-pointer"
                                         onClick={() => {
                                             setSelectedCurrency(currency);
                                             setIsCurrencyOpen(false);
@@ -123,7 +149,7 @@ const header = () => {
                     {/* Sélecteur de Langue */}
                     <div className="relative" ref={langRef}>
                         <p
-                            className="flex items-center text-[18px] cursor-pointer"
+                            className="flex uppercase items-center text-[14px] sm:text-[18px] cursor-pointer"
                             onClick={() => setIsLangOpen(!isLangOpen)}
                         >
                             {/* Affichage du drapeau */}
@@ -134,11 +160,11 @@ const header = () => {
 
                         {/* Dropdown Langue */}
                         {isLangOpen && (
-                            <div className='absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-10'>
+                            <div className='absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10'>
                                 {languages.map((lang) => (
                                     <p
                                         key={lang.code}
-                                        className="language p-2 text-[18px] cursor-pointer flex items-center"
+                                        className="language uppercase p-2 text-[14px] sm:text-[18px] cursor-pointer flex items-center"
                                         onClick={() => {
                                             changeLanguage(lang.code);
                                             setIsLangOpen(false);
@@ -154,18 +180,79 @@ const header = () => {
                 </div>
 
             </div>
-            <div className="part2 py-5 px-5 flex justify-between items-center">
+            <div className="part2 py-5 px- sm:py-5 sm:px-5 flex justify-between items-center relative">
+
+                {/* Logo (Visible sur toutes les tailles) */}
                 <a href="#">
-                    <img src={Logo} alt="Logo FlyGabon" className="pl-8 w-100" />
+                    <img src={Logo} alt="Logo FlyGabon" className="w-60 xl:pl-8 md:w-80 lg:w-100" />
                 </a>
-                <div className="flex pr-17">
-                    <a href={agenceUrl} target="_blank" className="cursor-pointer mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
-                        <h5 className="uppercase flex text-[18px]"> {t('agence')}</h5>
+
+                {/* ---------------------------------------------------
+                  --- A. LIENS DE NAVIGATION (Cachés en dessous de sm) ---
+                  --------------------------------------------------- */}
+                <div className="hidden sm:flex md:pr-8 lg:pr-12 xl:pr-17 items-center">
+                    <a href={agenceUrl} target="_blank" className="cursor-pointer mx-1 sm:mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
+                        <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('agence')}</h5>
                     </a>
                     <a href={cclUrl} target="_blank" className="cursor-pointer" rel="noopener noreferrer">
-                        <h5 className="uppercase flex text-[18px]"> {t('Nous-contactez')}</h5>
+                        <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('contact')}</h5>
                     </a>
                 </div>
+
+                {/* -----------------------------------------------------
+                  --- B. BOUTON HAMBURGER (disponible pour les téléphones) ---
+                  ----------------------------------------------------- */}
+                <div ref={menuRef}>
+                    <button
+                        onClick={toggleMenu}
+                        className="sm:hidden p-1 mr-5 rounded focus:outline-none"
+                        aria-label="Toggle navigation menu"
+                    >
+                        {/* Icône Hamburger ou Croix */}
+                        {isMenuOpen ? (
+                            <i className="fas fa-times text-[#5F5F5F] text-3xl"></i> // Icône de fermeture (Croix)
+                        ) : (
+                            <i className="fas fa-bars text-[#5F5F5F] text-3xl"></i> // Icône Hamburger
+                        )}
+                    </button>
+
+                    {isMenuOpen && (
+                        <div
+
+                            className={`
+                            absolute right-5 top-16 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 
+                            transition-all duration-400 ease-out transform origin-top-right 
+                            ${isMenuOpen
+                                    ? 'opacity-100 scale-100 visible'
+                                    : 'opacity-0 scale-60 invisible'
+                                }
+                        `}
+                            style={{ display: isMenuOpen ? 'block' : 'none' }}
+                        >
+                            {/* Les liens sont dans le menu déroulant */}
+                            <a
+                                href={agenceUrl}
+                                target="_blank"
+                                className="block px-4 py-2 text-[16px] text-gray-800 hover:bg-gray-100"
+                                rel="noopener noreferrer"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {t('agence')}
+                            </a>
+                            <a
+                                href={cclUrl}
+                                target="_blank"
+                                className="block px-4 py-2 text-[16px] text-gray-800 hover:bg-gray-100"
+                                rel="noopener noreferrer"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {t('contact')}
+                            </a>
+                        </div>
+                    )}
+                </div>
+
+
             </div>
         </div>
 

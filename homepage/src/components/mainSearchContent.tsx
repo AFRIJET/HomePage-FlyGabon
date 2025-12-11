@@ -7,17 +7,20 @@ import {
     PropertySearchIcon,
     CheckListIcon,
 } from 'hugeicons-react';
+import { useTranslation } from 'react-i18next';
 
 const MainSearchContent = () => {
+
+    const {t} = useTranslation();
 
     // --- État Global pour la Navigation ---
     const [selectedOption, setSelectedOption] = useState('flight');
 
     // --- Définition des options de recherche ---
     const options: { id: string; label: string; icon: any; component: React.ComponentType<any>; }[] = [
-        { id: 'flight', label: 'BOOK FLIGHT', icon: <i className="fa-solid fa-plane-departure mr-3 text-[25px]"></i>, component: FlightSearchForm },
-        { id: 'reservation', label: 'FIND RESERVATION', icon: <PropertySearchIcon size={26} className="mr-2" />, component: FindReservationForm },
-        { id: 'checkin', label: 'CHECK-IN', icon: <CheckListIcon size={26} className="mr-2" />, component: CheckInForm },
+        { id: 'flight', label: t('option-reservation'), icon: <i className="fa-solid fa-plane-departure mr-3 lg:text-[20px] xl:text-[25px]"></i>, component: FlightSearchForm },
+        { id: 'reservation', label: t('option-search-reservation'), icon: <PropertySearchIcon size={26} className="mr-2" />, component: FindReservationForm },
+        { id: 'checkin', label: t('option-checkin'), icon: <CheckListIcon size={26} className="mr-2" />, component: CheckInForm },
     ];
 
     // --- Logic & States pour BOOK FLIGHT ---
@@ -132,9 +135,10 @@ const MainSearchContent = () => {
                         key={option.id}
                         onClick={() => setSelectedOption(option.id)}
                         // Classes de base pour tous les onglets
-                        className={`section-option flex items-center px-20 py-3 cursor-pointer transition text-white
+                        className={`section-option flex items-center flex-1 sm:flex-none justify-center sm:justify-start md:px-8 lg:px-6 xl:px-15 py-3 uppercase cursor-pointer transition text-white
                             ${option.id === 'flight' ? 'rounded-tl-lg border-r border-gray-600' : ''}
                             ${option.id === 'reservation' ? 'border-r border-gray-600' : ''}
+                            ${option.id === 'checkin' ? 'rounded-tr-lg sm:rounded-none' : ''}
                             ${option.id === selectedOption
                                 ? 'bg-[#919191]'
                                 : 'bg-[#4764B2] hover:bg-[#919191]'
@@ -142,7 +146,7 @@ const MainSearchContent = () => {
                         `}
                     >
                         {option.icon}
-                        <h4 className='text-[18px]'>{option.label}</h4>
+                        <h4 className='text-[0px] sm:text-[14px] lg:text-[16px] xl:text-[18px]'>{option.label}</h4>
                     </div>
                 ))}
 

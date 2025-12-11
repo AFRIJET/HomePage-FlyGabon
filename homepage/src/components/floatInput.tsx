@@ -31,13 +31,13 @@ const FloatingInput = ({ placeholder, initialValue = '', type = 'text', onChange
             
             {/* 1. Le Label Flottant */}
             <label
-                className={`absolute left-4 transition-all duration-300 pointer-events-none z-10 text-white
+                className={`absolute left-4 transition-all uppercase duration-300 pointer-events-none z-10 text-white
                     ${isLabelFloating
-                        ? 'top-2 text-xs font-semibold text-gray-400' // Flottant (petit, haut)
-                        : 'top-1/2 -translate-y-1/2 text-gray-400 text-lg' // Statique (grand, centré)
+                        ? 'top-2 text-xs font-semibold text-gray-400'
+                        : 'top-1/2 -translate-y-1/2 text-gray-400 text-lg'
                     }
                 `}
-                htmlFor={placeholder} // Associe le label à l'input
+                htmlFor={placeholder}
             >
                 {placeholder}
             </label>
@@ -50,7 +50,6 @@ const FloatingInput = ({ placeholder, initialValue = '', type = 'text', onChange
                 onChange={handleChange}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                // Les paddings changent si le label flotte ou non
                 className={`input-search-name w-full h-full rounded-lg focus:outline-none text-gray-800 text-base 
                     ${isLabelFloating ? 'pt-6 pb-2 px-4' : 'py-4 px-4'}
                 `}

@@ -9,19 +9,21 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // @ts-ignore: no type declarations for swiper css
 import 'swiper/css/autoplay';
-
-const allSlidesData = [
-    { id: 1, src: './src/assets/images/dest-libreville.jpg', alt: 'Libreville', country: 'Gabon' },
-    { id: 2, src: './src/assets/images/dest-port-gentil.png', alt: 'Port-Gentil', country: 'Gabon' },
-    { id: 3, src: './src/assets/images/dest-franceville.png', alt: 'Franceville', country: 'Gabon' },
-    { id: 4, src: './src/assets/images/dest-oyem.png', alt: 'Oyem', country: 'Gabon' },
-    { id: 5, src: './src/assets/images/dest-douala.webp', alt: 'Douala', country: 'Cameroun' },
-];
+import { useTranslation } from 'react-i18next';
 
 const DomesticCarousel = () => {
 
+    const { t } = useTranslation();
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
+
+    const allSlidesData = [
+        { id: 1, src: './src/assets/images/dest-libreville.jpg', alt: 'Libreville', country: 'Gabon' },
+        { id: 2, src: './src/assets/images/dest-port-gentil.png', alt: 'Port-Gentil', country: 'Gabon' },
+        { id: 3, src: './src/assets/images/dest-franceville.png', alt: 'Franceville', country: 'Gabon' },
+        { id: 4, src: './src/assets/images/dest-oyem.png', alt: 'Oyem', country: 'Gabon' },
+        { id: 5, src: './src/assets/images/dest-douala.webp', alt: 'Douala', country: `${t('Cameroun')}` },
+    ];
 
     // --- 2. GESTION DU FILTRE ---
     const [activeFilter, setActiveFilter] = useState('All');
@@ -48,22 +50,22 @@ const DomesticCarousel = () => {
     return (
         <div className="carousel-container w-full px-10">
 
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-start sm:items-center mb-6">
                 {/* 1. Bouton de Navigation PRÉCÉDENT (Gauche) */}
-                <div className="flex space-x-3 text-white">
+                <div className="hidden sm:flex space-x-3 text-white">
                     <button ref={navigationPrevRef} className="p-3 rounded-full w-10 bg-[#919191] hover:bg-gray-500 transition shadow-md" aria-label="Slide précédent">
                         <i className="fas fa-chevron-left"></i>
                     </button>
                 </div>
 
                 {/* 2. Titre et Description (Centré) */}
-                <div className="flex-1 mx-8 text-center"> {/* Utilisation de flex-1 et text-center */}
-                    <h2 className="text-[28px] font-bold text-[#333333]">Nos Destinations</h2>
-                    <p className="text-lg text-[#5F5F5F]">Découvrez les paysages à couper le souffle et la culture vibrante du Gabon</p> {/* J'ai ajusté la taille du texte pour la description */}
+                <div className="flex-1 sm:mx-8 text-center"> {/* Utilisation de flex-1 et text-center */}
+                    <h2 className="text-[28px] font-bold text-[#333333]">{t('nos-destinations')}</h2>
+                    <p className="text-lg text-[#5F5F5F]">{t('description-destination')}</p>
                 </div>
 
                 {/* 3. Bouton de Navigation SUIVANT (Droite) */}
-                <div className="flex space-x-3 text-white">
+                <div className="hidden sm:flex space-x-3 text-white">
                     <button ref={navigationNextRef} className="p-3 rounded-full w-10 bg-[#919191] hover:bg-gray-500 transition shadow-md" aria-label="Slide suivant">
                         <i className="fas fa-chevron-right"></i>
                     </button>

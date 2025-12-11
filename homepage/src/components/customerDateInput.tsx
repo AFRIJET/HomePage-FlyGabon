@@ -63,7 +63,7 @@ const CustomDateInput = ({ placeholder, value, onChange, disabled }: Props) => {
                 disabled={disabled}
                 onClick={() => setIsCalendarOpen(true)} // Ouvre le pop-up au clic
                 // Padding pour la position du label flottant
-                className={`date-input w-full h-full pt-6 pb-2 px-4 rounded-lg focus:outline-none text-base ${isLabelFloating ? '' : 'pt-4 pb-4'}`}
+                className={`date-input w-full md:w-30 xl:w-full h-full pt-6 pb-2 px-4 rounded-lg focus:outline-none text-base ${isLabelFloating ? '' : 'pt-4 pb-4'}`}
             />
 
             {/* 3. Icône Calendrier */}

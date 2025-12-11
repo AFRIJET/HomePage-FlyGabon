@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { UserIcon, Remove01Icon, Add01Icon } from 'hugeicons-react';
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     placeholder: string;
@@ -14,6 +15,7 @@ const initialCounts = {
 };
 
 const PassengerSelector = ({ placeholder, onChange }: Props) => {
+    const {t} = useTranslation();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [counts, setCounts] = useState(initialCounts);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -43,7 +45,7 @@ const PassengerSelector = ({ placeholder, onChange }: Props) => {
 
     const calculateTotal = (newCounts: PassengerCounts): string => {
         const total = newCounts.adults + newCounts.children + newCounts.babies;
-        const totalDisplay = `${total} Passager${total > 1 ? 's' : ''}`;
+        const totalDisplay = `${total} ${t('passager')}${total > 1 ? 's' : ''}`;
 
         // Appelle la fonction de mise à jour du parent
         onChange(totalDisplay, newCounts);
@@ -92,9 +94,9 @@ const PassengerSelector = ({ placeholder, onChange }: Props) => {
                 <div className="font-semibold text-gray-800">{label}</div>
                 <div className="text-xs text-gray-500">
                     <span>
-                        {type === 'adults' && '12 ans et +'}
-                        {type === 'children' && '2 - 12 ans'}
-                        {type === 'babies' && 'Moins de 2 ans'}
+                        {type === 'adults' && t('desc-adulte')}
+                        {type === 'children' && t('desc-enfant')}
+                        {type === 'babies' && t('desc-bebe')}
                     </span>
                 </div>
             </div>
@@ -154,10 +156,10 @@ const PassengerSelector = ({ placeholder, onChange }: Props) => {
 
             {/* 3. Pop-up de Sélection */}
             {isPopupOpen && (
-                <div className="absolute top-full right-0 mt-2 z-50 shadow-2xl rounded-lg bg-white p-4 w-72 border border-gray-200">
-                    <PassengerRow type="adults" label="Adultes" count={counts.adults} min={1} />
-                    <PassengerRow type="children" label="Enfants" count={counts.children} />
-                    <PassengerRow type="babies" label="Bébés" count={counts.babies} />
+                <div className="absolute top-full right-0 mt-2 z-50 shadow-2xl rounded-lg bg-white p-4 w-60 border border-gray-200">
+                    <PassengerRow type="adults" label={t('adulte')} count={counts.adults} min={1} />
+                    <PassengerRow type="children" label={t('enfant')} count={counts.children} />
+                    <PassengerRow type="babies" label={t('bebe')} count={counts.babies} />
 
                     <button
                         onClick={() => setIsPopupOpen(false)}

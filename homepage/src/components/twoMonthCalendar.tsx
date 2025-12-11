@@ -12,7 +12,6 @@ const getDaysInMonth = (year: number, month: number) => {
     const days = [];
 
     // Remplir les jours vides au début (Lundi=0, Dimanche=6)
-    // Nous allons ajuster pour un début de semaine au Lundi (1)
     const startDayIndex = (date.getDay() === 0 ? 6 : date.getDay() - 1);
     for (let i = 0; i < startDayIndex; i++) {
         days.push(null);
@@ -26,64 +25,60 @@ const getDaysInMonth = (year: number, month: number) => {
     return days;
 };
 
-// Types pour MonthView
+// Types pour MonthView (inchangé)
 type MonthViewProps = {
     monthIndex: number;
     year: number;
     onDateClick: (date: Date) => void;
     selectedDate: Date | null;
+    className?: string;
 };
 
-// Composant pour un seul mois
-const MonthView = ({ monthIndex, year, onDateClick, selectedDate }: MonthViewProps) => {
+// Composant pour un seul mois (Mise à Jour de la Largeur)
+const MonthView = ({ monthIndex, year, onDateClick, selectedDate, className }: MonthViewProps) => {
     const days = getDaysInMonth(year, monthIndex);
     const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
     return (
-        <div className="w-1/2 p-2 ml-2">
+        // Changement 3: w-full par défaut (mobile), sm:w-1/2 à partir de sm
+        // Retrait de 'ml-2' pour le mobile, ajout de 'sm:ml-2' si nécessaire (ou laisser un petit padding sur le parent)
+        <div className={`w-full p-2 ${className || ''}`}>
             <h3 className="text-center mb-2 text-gray-700">
                 {formatDateHeader(new Date(year, monthIndex))}
             </h3>
 
-            {/* Jours de la semaine */}
+            {/* Jours de la semaine (inchangé) */}
             <div className="grid grid-cols-7 text-xs text-[15px] mb-1">
                 {dayNames.map(name => (
                     <div key={name} className="text-center"><p>{name}</p></div>
                 ))}
             </div>
 
-            {/* Grille des jours */}
+            {/* Grille des jours (inchangé) */}
             <div className="grid grid-cols-7 gap-2">
                 {days.map((day, index) => {
+                    // ... Logique des jours (inchangé) ...
                     const today = new Date();
-                    // Pour comparer seulement la date, on met l'heure d'aujourd'hui à minuit.
                     today.setHours(0, 0, 0, 0);
 
-                    // Vérifie si le jour est dans le passé (strictement avant aujourd'hui)
                     const isDisabled = !!day && day < today;
-
                     const isToday = !!day && day.toDateString() === new Date().toDateString();
                     const isSelected = !!day && !!selectedDate && day.toDateString() === selectedDate.toDateString();
 
                     if (!day) {
-                        return <div key={index} className="h-6"></div>; // Jour vide
+                        return <div key={index} className="h-6"></div>;
                     }
 
                     const baseClasses = 'h-6 text-sm flex items-center justify-center rounded-sm p-3 cursor-pointer transition-colors text-[16px]';
-
                     let dayClasses = '';
 
                     if (isDisabled) {
-                        // Style des jours passés (désactivés, faible opacité)
                         dayClasses = 'bg-gray-300 text-white cursor-not-allowed';
                     } else if (isSelected) {
-                        // Style de la date sélectionnée (couleur accentuée)
                         dayClasses = 'bg-red-500 text-white hover:bg-red-600';
                     } else if (isToday) {
-                        // Style d'aujourd'hui (couleur accentuée, bordure)
                         dayClasses = 'bg-[#4764B2] text-white';
                     } else {
-                        // Style des jours disponibles (texte blanc sur fond sombre)
                         dayClasses = 'bg-gray-100 text-gray-700 hover:bg-gray-300';
                     }
 
@@ -92,7 +87,7 @@ const MonthView = ({ monthIndex, year, onDateClick, selectedDate }: MonthViewPro
                             key={index}
                             onClick={() => onDateClick(day)}
                             className={`${baseClasses} ${dayClasses}`}
-                            disabled={isDisabled} // Désactive le bouton si la date est passée
+                            disabled={isDisabled}
                         >
                             {day.getDate()}
                         </button>
@@ -103,16 +98,13 @@ const MonthView = ({ monthIndex, year, onDateClick, selectedDate }: MonthViewPro
     );
 };
 
-// Composant principal TwoMonthCalendar
+// Composant principal TwoMonthCalendar (Mise à Jour)
 const TwoMonthCalendar = ({ onSelect, leg }: { onSelect: (date: Date) => void; leg: any }) => {
-    // État gérant le mois affiché (le premier mois)
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-    // Date du deuxième mois
     const nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
 
-    // Fonction de navigation
     const navigateMonth = (direction: number) => {
         const newMonth = new Date(
             currentMonth.getFullYear(),
@@ -122,16 +114,16 @@ const TwoMonthCalendar = ({ onSelect, leg }: { onSelect: (date: Date) => void; l
         setCurrentMonth(newMonth);
     };
 
-    // Gestion du clic sur une date
     const handleDateClick = (date: Date) => {
         setSelectedDate(date);
-        onSelect(date); // Renvoyer la date sélectionnée au composant parent
+        onSelect(date);
     };
 
     return (
-        <div className="flex flex-col bg-white w-[650px]">
+        // Changement 1: w-full par défaut, sm:w-[650px] à partir de sm
+        <div className="z-[9999] flex flex-col bg-white w-full sm:w-[650px]">
 
-            {/* Barres de navigation */}
+            {/* Barres de navigation (inchangé) */}
             <div className="flex justify-between items-center px-4 py-2">
                 <button
                     onClick={() => navigateMonth(-1)}
@@ -152,19 +144,25 @@ const TwoMonthCalendar = ({ onSelect, leg }: { onSelect: (date: Date) => void; l
                 </button>
             </div>
 
-            {/* Vue des deux mois */}
+            {/* Vue des mois */}
             <div className="flex p-2">
+                {/* Premier Mois (Toujours visible) */}
                 <MonthView
                     monthIndex={currentMonth.getMonth()}
                     year={currentMonth.getFullYear()}
                     onDateClick={handleDateClick}
                     selectedDate={selectedDate}
+                    className="flex-1"
                 />
+
+                {/* Deuxième Mois */}
+                {/* Changement 2: hidden par défaut (mobile), sm:flex pour l'afficher à partir de sm */}
                 <MonthView
                     monthIndex={nextMonth.getMonth()}
                     year={nextMonth.getFullYear()}
                     onDateClick={handleDateClick}
                     selectedDate={selectedDate}
+                    className="hidden sm:block flex-1"
                 />
             </div>
         </div>

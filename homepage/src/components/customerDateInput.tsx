@@ -8,9 +8,10 @@ type Props = {
     value: string;
     onChange: (date: string) => void;
     disabled?: boolean;
+    type?: string
 }
 
-const CustomDateInput = ({ placeholder, value, onChange, disabled }: Props) => {
+const CustomDateInput = ({ placeholder, value, onChange, disabled, type }: Props) => {
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,7 +41,7 @@ const CustomDateInput = ({ placeholder, value, onChange, disabled }: Props) => {
 
     return (
         <div 
-            className={`relative z-50 w-full h-16 bg-white border-r border-gray-400 rounded-lg ${disabled ? 'bg-gray-200' : ''}`}
+            className={`relative w-full h-16 bg-white border-r border-gray-400 rounded-lg ${disabled ? 'bg-gray-200' : ''}`}
             ref={containerRef}
         >
             {/* 1. Étiquette Flottante/Statique */}
@@ -63,7 +64,7 @@ const CustomDateInput = ({ placeholder, value, onChange, disabled }: Props) => {
                 disabled={disabled}
                 onClick={() => setIsCalendarOpen(true)} // Ouvre le pop-up au clic
                 // Padding pour la position du label flottant
-                className={`date-input w-full md:w-30 xl:w-full h-full pt-6 pb-2 px-4 rounded-lg focus:outline-none text-base ${isLabelFloating ? '' : 'pt-4 pb-4'}`}
+                className={`date-input w-full  xl:w-full h-full pt-6 pb-2 px-4 rounded-lg focus:outline-none text-base ${isLabelFloating ? '' : 'pt-4 pb-4'}`}
             />
 
             {/* 3. Icône Calendrier */}
@@ -71,7 +72,7 @@ const CustomDateInput = ({ placeholder, value, onChange, disabled }: Props) => {
 
             {/* 4. Pop-up Calendrier (Position Absolue) */}
             {isCalendarOpen && !disabled && (
-                <div className="absolute top-full z-[9999] -left-50 mt-2 shadow-2xl rounded-lg bg-white p-4 border border-gray-200">
+                <div className={`absolute top-full z-[9999] mt-2 shadow-2xl rounded-lg bg-white p-4 border border-gray-200 ${type === 'depart' ? 'lg:-left-80 xl:-left-50' : 'md:-left-50 lg:-left-75'}`}>
                     <TwoMonthCalendar onSelect={handleDateSelect} leg={placeholder} />
                 </div>
             )}

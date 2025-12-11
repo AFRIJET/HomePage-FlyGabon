@@ -163,6 +163,7 @@ const flightSearchForm = ({
                                     placeholder={t('depart')}
                                     value={departDate}
                                     onChange={setDepartDate}
+                                    type='depart'
                                 />
                             </div>
 

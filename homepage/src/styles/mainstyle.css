@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Proprietes generales */
+:root {
+
+    /* Couleurs principales */
+    --colors-primary: #4764B2;
+    --colors-secondary: #009E60;
+    --colors-accent1: #5E5E5D;
+    --colors-accent2: #FCD115;
+    --colors-baseText: #333333;
+    --colors-softText: #5F5F5F;
+    --colors-lightText: #FFFFFF;
+    --colors-border: #CED4DA;
+    --colors-softBackground: #F8FAFB;
+    --colors-mainBackground: #FFFFFF;
+    --colors-secondBackground: #919191;
+}
+
+
+
+/* Styles typographiques */
+
+h1,
+h2,
+h3 {
+    font-family: 'Open Sans', 'Arial';
+    line-height: 1.2;
+    letter-spacing: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--colors-baseText);
+}
+
+h4,
+h5,
+h6,
+button {
+    font-family: 'Open Sans', 'Arial';
+    line-height: 1.2;
+    letter-spacing: normal;
+    font-weight: 600;
+}
+
+p,
+a {
+    font-family: 'Open Sans', 'Arial';
+    line-height: 1.5;
+    letter-spacing: normal;
+    font-weight: 500;
+    color: var(--colors-baseText);
+}
+
+label {
+    font-family: 'Open Sans', 'Arial';
+    line-height: 1.5;
+    letter-spacing: normal;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--colors-baseText);
+}
+
+span {
+    font-family: 'Open Sans', 'Arial';
+    line-height: 1.5;
+    letter-spacing: normal;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--colors-baseText);
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    /* Pour la compatibilité WebKit (Safari, Chrome) */
+    -moz-appearance: none;
+    border: 2px solid var(--colors-lightText);
+    transition: background-color 0.2s ease;
+
+}
+
+input[type="radio"]:checked {
+    background-color: var(--colors-primary);
+}
+
+/* Composant Header */
+
+.header .part1 {
+    background: var(--colors-softBackground);
+}
+
+.header .part2 a:hover, .header .part1 a:hover {
+    color: var(--colors-primary);
+}
+
+.money {
+    background: var(--colors-primary);
+    color: #FFFFFF;
+}
+
+.currency:hover,
+.language:hover {
+    background: var(--colors-softBackground);
+    color: var(--colors-primary);
+}
+
+/* Composant flightSearchForm */
+
+.search-form {
+    background: var(--colors-secondBackground);
+    box-shadow:  0 0 8px rgb(0, 0, 0);
+}
+
+.search-form label p {
+    color: var(--colors-lightText);
+    font-weight: 400;
+}
+
+.search-option {
+    background: transparent;
+}
+
+.search-option .section-option {
+    border-color: var(--colors-softBackground);
+}
+
+.search-option .section-option:hover {
+    background: var(--colors-secondBackground);
+}
+
+.search-option .section-option.selected {
+    background: var(--colors-secondBackground);
+    color: var(--colors-lightText);
+    border-right: 1px solid var(--colors-softBackground);
+}
+
+.form-radio {
+    color: var(--colors-primary);
+
+}
+
+.input-from,
+.input-to {
+    background: var(--colors-softBackground);
+}
+
+.exchange-button {
+    background: var(--colors-secondBackground);
+}
+
+.icon-div {
+    background-color: var(--colors-softBackground);
+}
+
+.icon-exchange {
+    color: var(--colors-baseText);
+}
+
+.date-input {
+    background: var(--colors-softBackground);
+    color: var(--colors-baseText);
+}
+
+.search-passager-button {
+    background: var(--colors-primary);
+    color: var(--colors-lightText);
+}
+
+.search-button {
+    background: var(--colors-secondary);
+}
+
+.search-button:hover {
+    background: var(--colors-primary);
+}
+
+.btn-add-flight[disabled] {
+    background: var(--colors-accent1);
+}
+
+.input-search-name {
+    background: var(--colors-softBackground);
+    color: var(--colors-baseText);
+}
+
+/* Caroussel */
+.dest-caroussel {
+    color: var(--colors-lightText);
+    font-weight: 600;
+}
+
+.pays-caroussel {
+    background: var(--colors-accent2);
+    color: var(--colors-primary);
+    font-weight: 600;
+}
+
+/* Footer */
+.footer .part1 a, .footer .part1 p, .footer .part2 a, .footer .part2 span {
+    color: var(--colors-lightText);
+}
+
+/* Scrollbar Styles */
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

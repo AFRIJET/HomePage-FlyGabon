@@ -6,14 +6,23 @@ import {
 } from 'hugeicons-react';
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useRef } from "react";
+import flagFR from '/src/assets/images/flag/FR.png';
+import flagGB from '/src/assets/images/flag/GB.png';
+import flagES from '/src/assets/images/flag/ES.png';
 
 const lmsUrl = import.meta.env.VITE_URL_LMS;
 const cclUrl = import.meta.env.VITE_URL_CCL;
 const agenceUrl = import.meta.env.VITE_URL_AGENCE;
 
 // Convertit le code pays (ex: FR) en drapeau emoji
+const flagMap: { [key: string]: string } = {
+    'FR': flagFR,
+    'GB': flagGB,
+    'ES': flagES,
+    // Ajoutez ici les autres correspondances
+};
 const FlagImage = (countryCode: string) => {
-    const flagSrc = `src/assets/images/flag/${countryCode}.png`;
+    const flagSrc = flagMap[countryCode];
 
     return <img src={flagSrc} alt={`Drapeau de ${countryCode}`} style={{ width: 24 }} />;
 };
@@ -180,7 +189,7 @@ const header = () => {
                 </div>
 
             </div>
-            <div className="part2 py-5 px- sm:py-5 sm:px-5 flex justify-between items-center relative">
+            <div className="part2 py-5 sm:py-5 sm:px-5 flex justify-between items-center ">
 
                 {/* Logo (Visible sur toutes les tailles) */}
                 <a href="#">
@@ -190,7 +199,7 @@ const header = () => {
                 {/* ---------------------------------------------------
                   --- A. LIENS DE NAVIGATION (Cachés en dessous de sm) ---
                   --------------------------------------------------- */}
-                <div className="hidden sm:flex md:pr-8 lg:pr-12 xl:pr-17 items-center">
+                <div className="hidden sm:flex w-210 justify-end items-center">
                     <a href={agenceUrl} target="_blank" className="cursor-pointer mx-1 sm:mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('agence')}</h5>
                     </a>
@@ -220,7 +229,7 @@ const header = () => {
                         <div
 
                             className={`
-                            absolute right-5 top-16 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 
+                            absolute right-5 top-30 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 
                             transition-all duration-400 ease-out transform origin-top-right 
                             ${isMenuOpen
                                     ? 'opacity-100 scale-100 visible'

@@ -1,7 +1,6 @@
 import React from 'react';
 import CustomDateInput from './customerDateInput';
 import { useTranslation } from 'react-i18next';
-import PassengerSelector from './passagerSelector';
 
 type MultiRouteFormProps = {
     route: {
@@ -52,7 +51,7 @@ const MultiRouteRow = ({ route, updateRoute }: MultiRouteFormProps) => {
         <div className="rounded-lg">
 
             {/* Grille du Trajet Supplémentaire */}
-            <div className="sm:flex space-y-1 items-center">
+            <div className="sm:flex space-y-2 items-center">
 
                 {/* Ville de Départ */}
                 <div className="md:flex-1">

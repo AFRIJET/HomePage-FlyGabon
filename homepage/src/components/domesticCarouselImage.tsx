@@ -10,6 +10,11 @@ import 'swiper/css/pagination';
 // @ts-ignore: no type declarations for swiper css
 import 'swiper/css/autoplay';
 import { useTranslation } from 'react-i18next';
+import Libreville from '/src/assets/images/dest-libreville.jpg'
+import PortGentil from '/src/assets/images/dest-port-gentil.png'
+import Franceville from '/src/assets/images/dest-franceville.png'
+import Oyem from '/src/assets/images/dest-oyem.png'
+import Douala from '/src/assets/images/dest-douala.webp'
 
 const DomesticCarousel = () => {
 
@@ -18,11 +23,11 @@ const DomesticCarousel = () => {
     const navigationNextRef = useRef(null);
 
     const allSlidesData = [
-        { id: 1, src: './src/assets/images/dest-libreville.jpg', alt: 'Libreville', country: 'Gabon' },
-        { id: 2, src: './src/assets/images/dest-port-gentil.png', alt: 'Port-Gentil', country: 'Gabon' },
-        { id: 3, src: './src/assets/images/dest-franceville.png', alt: 'Franceville', country: 'Gabon' },
-        { id: 4, src: './src/assets/images/dest-oyem.png', alt: 'Oyem', country: 'Gabon' },
-        { id: 5, src: './src/assets/images/dest-douala.webp', alt: 'Douala', country: `${t('Cameroun')}` },
+        { id: 1, src: Libreville, alt: 'Libreville', country: 'Gabon' },
+        { id: 2, src: PortGentil, alt: 'Port-Gentil', country: 'Gabon' },
+        { id: 3, src: Franceville, alt: 'Franceville', country: 'Gabon' },
+        { id: 4, src: Oyem, alt: 'Oyem', country: 'Gabon' },
+        { id: 5, src: Douala, alt: 'Douala', country: `${t('Cameroun')}` },
     ];
 
     // --- 2. GESTION DU FILTRE ---

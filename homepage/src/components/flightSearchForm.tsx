@@ -193,7 +193,7 @@ const flightSearchForm = ({
 
                     {/* 3. Routes Supplémentaires (Affiches SEULEMENT en mode Multi-route) */}
                     {tripType === 'Multi-route' && (
-                        <div className="sm:mt-6 space-y-2">
+                        <div className="sm:mt-2 space-y-2">
 
                             {/* Affichage des routes au-delà du premier (ID > 1) */}
                             {routes.slice(1).map((route, index) => (

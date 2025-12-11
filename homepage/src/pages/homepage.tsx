@@ -3,32 +3,37 @@ import Header from "../components/header";
 import MainSearchContent from "../components/mainSearchContent";
 import DomesticCarousel from "../components/domesticCarouselImage";
 import Footer from "../components/footer";
+import AvionFlyGabon from '/src/assets/images/bg-plane-flygabon.jpg'
+import AvionFlyGabonFace from '/src/assets/images/bg-plane-flygabon-face.jpg'
+import SalonFlyGabon from '/src/assets/images/bg-lounge-flygabon.jpg'
+import OiseauxGabon from '/src/assets/images/bg-oiseaux-gabon.png'
+import TerminalFlyGabon from '/src/assets/images/bg-terminal-flygabon.jpg'
 
 const homepage = () => {
 
     const images = [
         {
-            src: './src/assets/images/bg-plane-flygabon.jpg',
+            src: AvionFlyGabon,
             alt: 'Avion FlyGabon',
             styleClasses: 'object-cover object-bottom'
         },
         {
-            src: './src/assets/images/bg-plane-flygabon-face.jpg',
+            src: AvionFlyGabonFace,
             alt: 'Avion FlyGabon de face',
             styleClasses: 'object-cover object-center'
         },
         {
-            src: './src/assets/images/bg-terminal-flygabon.jpg',
+            src: TerminalFlyGabon,
             alt: 'Terminal FlyGabon',
             styleClasses: 'object-cover object-center'
         },
         {
-            src: './src/assets/images/bg-lounge-flygabon.jpg',
+            src: SalonFlyGabon,
             alt: 'Salon FlyGabon',
             styleClasses: 'object-cover object-center'
         },
         {
-            src: './src/assets/images/bg-oiseaux-gabon.png',
+            src: OiseauxGabon,
             alt: 'Oiseaux du Gabon',
             styleClasses: 'object-cover object-top'
         },

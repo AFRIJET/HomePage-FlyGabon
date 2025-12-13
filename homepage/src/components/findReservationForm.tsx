@@ -16,7 +16,7 @@ const FindReservationForm = () => {
     return (
         <div>
             {/* Formulaire de Recherche de Réservation */}
-            <form onSubmit={handleSubmit} className="search-form rounded-r-lg rounded-b-lg p-8 space-y-8 ">
+            <form onSubmit={handleSubmit} className="search-form md:rounded-r-lg rounded-b-lg rounded-b-lg p-8 space-y-8 ">
 
                 <h4 className="text-[18px] md:text-[20px] text-white uppercase">{t('search-reservation')}</h4>
 
@@ -40,7 +40,7 @@ const FindReservationForm = () => {
 
                 </div>
 
-                <div className="col-span-3 mt-5 sm:w-[100vw] h-16">
+                <div className="col-span-3 mt-5 md:w-[100vw] h-16">
                     <div className='h-15 w-full md:w-70 sm:flex-1'>
                         <button
                             type="submit"

@@ -5,8 +5,73 @@ import CustomDatePicker from './customerDateInput';
 import PassengerSelector from './passagerSelector';
 import MultiRouteRow from './multiRouteRow';
 import { useTranslation } from 'react-i18next';
+import DestSelectedBox from './destSelectedBox';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 
-// Declaration des proprietes de FlightSearchForm
+async function fetchAndGroupDestinationsAxios() {
+
+    const API_URL = "https://abs-stage.crane.aero/ibe/search";
+
+    try {
+        // --- 1. Requête GET avec Axios ---
+        const response = await axios.get(`${API_URL}/search/portGroupsByPortCode`, {
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+
+        // Axios place les données JSON dans response.data
+        const apiData = response.data;
+
+        // --- 2. Regrouper les données par pays ---
+        type GroupedCountry = {
+            country: string;
+            cities: Array<{ code?: string; name?: string; country?: string }>;
+        };
+
+        const groupedByCountry: Record<string, GroupedCountry> = {};
+
+        // Parcourir toutes les données récupérées
+        Object.keys(apiData).forEach(iataCode => {
+            const cityData: any = apiData[iataCode][0];
+            const countryName = String(cityData.countryName);
+
+            // Si le pays n'existe pas encore dans notre objet de regroupement, on l'initialise
+            if (!groupedByCountry[countryName]) {
+                groupedByCountry[countryName] = {
+                    country: countryName,
+                    cities: []
+                };
+            }
+
+            // Ajouter les villes dans nos pays regrouper
+            groupedByCountry[countryName].cities.push({
+                code: cityData.code,
+                name: cityData.portName || cityData.cityName,
+                country: countryName,
+            });
+        });
+
+        // --- 3. Stockage des Données (format final) ---
+        const finalGroupedDestinations = Object.values(groupedByCountry);
+
+        return finalGroupedDestinations;
+
+    } catch (error) {
+        // Axios offre un meilleur traitement des erreurs, y compris response.status
+        if (axios.isAxiosError(error)) {
+            console.error("Erreur de requête Axios:", error.message);
+            if (error.response) {
+                console.error("Statut de la réponse:", error.response.status);
+            }
+        } else {
+            console.error("Erreur inattendue:", error);
+        }
+        return [];
+    }
+}
+
 type Props = {
     // --- Trip Type ---
     tripType: string;
@@ -53,10 +118,6 @@ const flightSearchForm = ({
     handleTripTypeChange,
 
     // --- Destinations ---
-    from,
-    setFrom,
-    to,
-    setTo,
     swapDestinations,
 
     // --- Dates ---
@@ -80,6 +141,15 @@ const flightSearchForm = ({
 
     const { t } = useTranslation();
 
+    const [destinationsData, setDestinationsData] = useState<any[]>([]);
+    const [selectedFrom, setSelectedFrom] = useState<any | null>(null);
+    const [selectedTo, setSelectedTo] = useState<any | null>(null);
+
+    useEffect(() => {
+        fetchAndGroupDestinationsAxios().then(data => {
+            setDestinationsData(data);
+        });
+    }, []);
 
     return (
         <div>
@@ -109,21 +179,15 @@ const flightSearchForm = ({
                     <div className="lg:flex md:grid sm:grid-col-1 md:gap-6 lg:gap-0 w-full items-center">
 
                         {/* Champ pour la recherche des destinations */}
-                        <div className='space-y-1 sm:space-y-2 w-[100%] sm:flex md:w-[98%] lg:w-[80%] mr-1'>
+                        <div className='space-y-1 sm:space-y-2 sm:flex sm:w-[98%] lg:w-[80%] mr-1'>
                             {/* Champ From */}
-                            <div className="relative z-10 md:flex-1">
-                                <label
-                                    className="absolute top-2 left-4 text-xs font-semibold text-gray-500 pointer-events-none z-10"
-                                >
-                                    {t('from')}
-                                </label>
-                                <input
-                                    type="text"
-                                    value={from}
-                                    onChange={(e) => setFrom(e.target.value)}
-                                    className="input-from w-full mr-1 pt-6 pb-2 px-4 focus:outline-none rounded-lg h-16"
-                                />
-                            </div>
+                            <DestSelectedBox
+                                t={t}
+                                initialValue={selectedFrom}
+                                onSelect={setSelectedFrom}
+                                destinationsData={destinationsData}
+                                label={t('from')}
+                            />
 
                             {/* Icône de Permutation */}
                             <div className="flex justify-end sm:justify-center mr-8 sm:mr-0 items-center">
@@ -138,21 +202,14 @@ const flightSearchForm = ({
                                     </div>
                                 </button>
                             </div>
-
                             {/* Champ To */}
-                            <div className="relative md:flex-1">
-                                <label
-                                    className="absolute top-2 left-4 sm:left-8 text-xs font-semibold text-gray-500 pointer-events-none z-10"
-                                >
-                                    {t('to')}
-                                </label>
-                                <input
-                                    type="text"
-                                    value={to}
-                                    onChange={(e) => setTo(e.target.value)}
-                                    className="input-to w-full sm:ml-1 pt-6 pb-2 px-7 focus:outline-none rounded-lg h-16"
-                                />
-                            </div>
+                            <DestSelectedBox
+                                t={t}
+                                initialValue={selectedTo}
+                                onSelect={setSelectedTo}
+                                destinationsData={destinationsData}
+                                label={t('to')}
+                            />
                         </div>
 
                         {/* Champ pour la recherche des dates et passagers */}

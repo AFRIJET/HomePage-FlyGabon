@@ -8,6 +8,12 @@ import AvionFlyGabonFace from '/src/assets/images/bg-plane-flygabon-face.jpg'
 import SalonFlyGabon from '/src/assets/images/bg-lounge-flygabon.jpg'
 import OiseauxGabon from '/src/assets/images/bg-oiseaux-gabon.png'
 import TerminalFlyGabon from '/src/assets/images/bg-terminal-flygabon.jpg'
+import CheckinFlyGabon from '/src/assets/images/bg-flygabon-checkin.jpg'
+import A320_Cabine from '/src/assets/images/A320_Cabine.jpg'
+import A320_Siege from '/src/assets/images/A320_Siege.jpg'
+import A320_Couloir from '/src/assets/images/A320_Couloir.jpg'
+import A320_Repas from '/src/assets/images/A320_Repas.jpg'
+import { motion } from 'framer-motion';
 
 const homepage = () => {
 
@@ -27,10 +33,35 @@ const homepage = () => {
             alt: 'Terminal FlyGabon',
             styleClasses: 'object-cover object-center'
         },
+         {
+            src: CheckinFlyGabon,
+            alt: 'Checkin FlyGabon',
+            styleClasses: 'object-cover object-center'
+        },
         {
             src: SalonFlyGabon,
             alt: 'Salon FlyGabon',
             styleClasses: 'object-cover object-center'
+        },
+        {
+            src: A320_Cabine,
+            alt: 'A320 Cabine',
+            styleClasses: 'object-cover object-center'
+        },
+        {
+            src: A320_Repas,
+            alt: 'Repas FlyGabon',
+            styleClasses: 'object-cover object-center'
+        },
+        {
+            src: A320_Couloir,
+            alt: 'A320 Couloir',
+            styleClasses: 'object-cover object-center'
+        },
+        {
+            src: A320_Siege,
+            alt: 'A320 Siege',
+            styleClasses: 'object-cover object-top'
         },
         {
             src: OiseauxGabon,
@@ -39,24 +70,49 @@ const homepage = () => {
         },
     ];
 
-    // État pour suivre l'index de l'image actuellement affichée
+    const transitionDuration = 1;
+    const displayDuration = 3;
+    const totalSets = 50;
+    const totalImages = images.length;   
+    const totalSlides = totalImages * totalSets;
+    const slides = [...images, ...images, ...images, ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images, ...images,
+        ...images, ...images
+    ];
     const [currentIndex, setCurrentIndex] = useState(0);
-    const totalImages = images.length;
-
-    // Logique pour le défilement automatique (Auto-Play)
     useEffect(() => {
-        // Définir un intervalle pour changer l'image
-        const intervalId = setInterval(() => {
-            setCurrentIndex((prevIndex) =>
-                (prevIndex + 1) % totalImages
-            );
-        }, 3000);
+        const interval = setInterval(() => {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        }, (transitionDuration + displayDuration) * 1000);
 
-        // Nettoyage de l'intervalle lorsque le composant est démonté
-        return () => clearInterval(intervalId);
-    }, [totalImages]);
+        return () => clearInterval(interval);
+    }, []);
 
-    const currentImage = images[currentIndex];
+    useEffect(() => {
+        if (currentIndex === totalSlides) {
+            const timeout = setTimeout(() => {
+                setCurrentIndex(0); // On revient instantanément à 0
+            }, transitionDuration * 1000); // Laisser la transition vers l'image dupliquée se terminer
+
+            return () => clearTimeout(timeout);
+        }
+    }, [currentIndex, totalImages]);
 
 
     return (
@@ -64,15 +120,33 @@ const homepage = () => {
         <div>
             <Header />
             <div className="carousel-container w-full h-150 relative overflow-hidden">
-
-                {/* 1. Affichage de l'image courante */}
-                <img
-                    src={currentImage.src}
-                    alt={currentImage.alt}
-                    // 2. Utilisation de la colonne styleClasses
-                    className={`w-[100vw] h-140 transition-opacity duration-1000 ${currentImage.styleClasses}`}
-                    style={{ opacity: 1 }}
-                />
+                
+                <motion.div
+                    className="carousel-track h-full flex flex-nowrap"
+                    animate={{
+                        x: `-${currentIndex * 100}%`
+                    }}
+                    transition={{
+                        type: "tween",
+                        duration: transitionDuration,
+                        ease: "easeInOut"
+                    }}
+                >
+                    {slides.map((img, index) => (
+                        <img
+                            key={index}
+                            src={img.src}
+                            alt={img.alt}
+                            className={`
+                                flex-shrink-0 
+                                h-140 
+                                w-full
+                                object-cover 
+                                ${img.styleClasses}
+                            `}
+                        />
+                    ))}
+                </motion.div>
             </div>
 
             <div className="-mt-40 relative z-10">

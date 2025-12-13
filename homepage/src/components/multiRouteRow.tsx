@@ -36,7 +36,7 @@ const SimpleDestinationInput = ({ value, onChange, placeholder }: SimpleDestinat
                 type="text"
                 value={value}
                 onChange={onChange}
-                className={`input-from w-full lg:w-47 xl:w-68 mr-1 pt-6 pb-2 px-4 focus:outline-none rounded-lg h-16 ${isToPlaceholder ? 'pl-8' : 'pl-4'}`}
+                className={`input-from w-full lg:w-47 xl:w-68 mr-1 pt-6 pb-2 px-4 focus:outline-none rounded-lg h-16 ${isToPlaceholder ? 'pl-4 sm:pl-8' : 'pl-4'}`}
             />
         </div>
     );
@@ -51,7 +51,7 @@ const MultiRouteRow = ({ route, updateRoute }: MultiRouteFormProps) => {
         <div className="rounded-lg">
 
             {/* Grille du Trajet Supplémentaire */}
-            <div className="sm:flex space-y-2 items-center">
+            <div className="sm:flex space-y-1 items-center">
 
                 {/* Ville de Départ */}
                 <div className="md:flex-1">

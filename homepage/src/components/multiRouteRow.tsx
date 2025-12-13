@@ -29,10 +29,12 @@ const SimpleDestinationInput = ({ value, onChange, placeholder }: SimpleDestinat
         <div className="relative z-10 md:flex-1">
             <label
                 className={`absolute top-2 text-xs font-semibold text-gray-500 pointer-events-none z-10 ${isToPlaceholder ? 'md:left-8 left-4' : 'left-4'}`}
+                htmlFor={placeholder}
             >
                 {placeholder}
             </label>
             <input
+                id={placeholder}
                 type="text"
                 value={value}
                 onChange={onChange}

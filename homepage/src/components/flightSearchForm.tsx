@@ -11,7 +11,7 @@ import axios from 'axios'
 
 async function fetchAndGroupDestinationsAxios() {
 
-    const API_URL = "https://abs-stage.crane.aero/ibe/search";
+    const API_URL = import.meta.env.VITE_URL_PSS;
 
     try {
         // --- 1. Requête GET avec Axios ---

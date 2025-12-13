@@ -23,13 +23,13 @@ const footer = () => {
                 </div>
 
                 <div className="flex mt-12 justify-center md:ml-0 md:mt-0 md:pr-10 lg:pr-17">
-                    <a href={lmsUrl} target="_blank" className="cursor-pointer text-white mx-4 hover:underline" rel="noopener noreferrer">
+                    <a href={lmsUrl} className="cursor-pointer text-white mx-4 hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] md:text-[16px] lg:text-[18px]">{t('my_account')}</h5>
                     </a>
-                    <a href={agenceUrl} target="_blank" className="cursor-pointer mr-4 hover:underline" rel="noopener noreferrer">
+                    <a href={agenceUrl} className="cursor-pointer mr-4 hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] md:text-[16px] lg:text-[18px]">{t('agence')}</h5>
                     </a>
-                    <a href={cclUrl} target="_blank" className="cursor-pointer text-white hover:underline" rel="noopener noreferrer">
+                    <a href={cclUrl} className="cursor-pointer text-white hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] md:text-[16px] lg:text-[18px]">{t('contact')}</h5>
                     </a>
                 </div>
@@ -39,13 +39,13 @@ const footer = () => {
                     <span>© {t('copyright')}</span>
                 </div>
                 <div className="flex space-x-2 sm:space-x-4 mt-4 pl-4 md:pr-8 lg:pr-10 order-1 md:order-2">
-                    <a href={dataUrl} target="_blank" className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
+                    <a href={dataUrl} className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[10px] sm:text-[12px]">{t('data-protection')}</h5>
                     </a>
-                    <a href={mentionUrl} target="_blank" className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
+                    <a href={mentionUrl} className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[10px] sm:text-[12px]">{t('mention')}</h5>
                     </a>
-                    <a href={conditionUrl} target="_blank" className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
+                    <a href={conditionUrl} className="cursor-pointer md:mx-3 lg:mx-8 hover:underline" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[10px] sm:text-[12px]">{t('condition')}</h5>
                     </a>
                 </div>

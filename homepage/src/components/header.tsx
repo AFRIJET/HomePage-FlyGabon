@@ -111,7 +111,7 @@ const header = () => {
 
                 {/* Section Mon Compte */}
                 <div className="my-account w-75">
-                    <a href={lmsUrl} target="_blank" className="cursor-pointer" rel="noopener noreferrer">
+                    <a href={lmsUrl} className="cursor-pointer" rel="noopener noreferrer">
                         <h5 className="flex items-center uppercase text-[15px] sm:text-[18px]">
                             <UserCircleIcon size={28} className="mr-2" /> {t('my_account')}
                         </h5>
@@ -196,10 +196,10 @@ const header = () => {
                   --- A. LIENS DE NAVIGATION (Cachés en dessous de sm) ---
                   --------------------------------------------------- */}
                 <div className="hidden sm:flex flex-1 justify-end sm:mr-8 xl:mr-18 items-center">
-                    <a href={agenceUrl} target="_blank" className="cursor-pointer mx-1 sm:mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
+                    <a href={agenceUrl} className="cursor-pointer mx-1 sm:mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('agence')}</h5>
                     </a>
-                    <a href={cclUrl} target="_blank" className="cursor-pointer" rel="noopener noreferrer">
+                    <a href={cclUrl} className="cursor-pointer" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('contact')}</h5>
                     </a>
                 </div>
@@ -237,7 +237,6 @@ const header = () => {
                             {/* Les liens sont dans le menu déroulant */}
                             <a
                                 href={agenceUrl}
-                                target="_blank"
                                 className="block px-4 py-2 text-[16px] text-gray-800 hover:bg-gray-100"
                                 rel="noopener noreferrer"
                                 onClick={() => setIsMenuOpen(false)}
@@ -246,7 +245,6 @@ const header = () => {
                             </a>
                             <a
                                 href={cclUrl}
-                                target="_blank"
                                 className="block px-4 py-2 text-[16px] text-gray-800 hover:bg-gray-100"
                                 rel="noopener noreferrer"
                                 onClick={() => setIsMenuOpen(false)}

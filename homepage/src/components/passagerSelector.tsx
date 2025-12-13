@@ -45,7 +45,7 @@ const PassengerSelector = ({ placeholder, onChange }: Props) => {
 
     const calculateTotal = (newCounts: PassengerCounts): string => {
         const total = newCounts.adults + newCounts.children + newCounts.babies;
-        const totalDisplay = `${total} ${t('passager')}${total > 1 ? 's' : ''}`;
+        const totalDisplay = `${total} ${t('passager')}${total > 1 ? '(s)' : ''}`;
 
         // Appelle la fonction de mise à jour du parent
         onChange(totalDisplay, newCounts);

@@ -9,21 +9,20 @@ import { useState, useEffect, useRef } from "react";
 import flagFR from '/src/assets/images/flag/FR.png';
 import flagGB from '/src/assets/images/flag/GB.png';
 import flagES from '/src/assets/images/flag/ES.png';
+import flagPR from '/src/assets/images/flag/PR.png';
 
 const lmsUrl = import.meta.env.VITE_URL_LMS;
 const cclUrl = import.meta.env.VITE_URL_CCL;
 const agenceUrl = import.meta.env.VITE_URL_AGENCE;
 
-// Convertit le code pays (ex: FR) en drapeau emoji
 const flagMap: { [key: string]: string } = {
     'FR': flagFR,
     'GB': flagGB,
     'ES': flagES,
-    // Ajoutez ici les autres correspondances
+    'PR': flagPR
 };
 const FlagImage = (countryCode: string) => {
     const flagSrc = flagMap[countryCode];
-
     return <img src={flagSrc} alt={`Drapeau de ${countryCode}`} style={{ width: 24 }} />;
 };
 
@@ -36,6 +35,7 @@ const header = () => {
         { code: "fr", label: t("francais"), flagCode: "FR" },
         { code: "en", label: t("anglais"), flagCode: "GB" },
         { code: "es", label: t("espagnol"), flagCode: "ES" },
+        { code: "pt", label: t("portugais"), flagCode: "PR" },
     ];
 
     // --- Devises (Monnaie) ---
@@ -64,20 +64,16 @@ const header = () => {
     // 2. Logique de fermeture des pop-ups au clic extérieur
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            // Si le clic n'est pas dans le sélecteur de langue et qu'il est ouvert, fermer
             if (langRef.current && !langRef.current.contains(event.target as Node)) {
                 setIsLangOpen(false);
             }
-            // Si le clic n'est pas dans le sélecteur de devise et qu'il est ouvert, fermer
             if (currencyRef.current && !currencyRef.current.contains(event.target as Node)) {
                 setIsCurrencyOpen(false);
             }
         };
 
-        // Ajouter l'écouteur d'événement au document
         document.addEventListener('mousedown', handleClickOutside);
 
-        // Nettoyage : retirer l'écouteur d'événement lorsque le composant est démonté
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -189,17 +185,17 @@ const header = () => {
                 </div>
 
             </div>
-            <div className="part2 py-5 sm:py-5 sm:px-5 flex justify-between items-center ">
+            <div className="part2 py-5 sm:px-5 flex justify-between items-center ">
 
                 {/* Logo (Visible sur toutes les tailles) */}
                 <a href="#">
-                    <img src={Logo} alt="Logo FlyGabon" className="w-60 xl:pl-8 md:w-80 lg:w-100" />
+                    <img src={Logo} alt="Logo FlyGabon" className="w-60 xl:pl-6 md:w-80 lg:w-100" />
                 </a>
 
                 {/* ---------------------------------------------------
                   --- A. LIENS DE NAVIGATION (Cachés en dessous de sm) ---
                   --------------------------------------------------- */}
-                <div className="hidden sm:flex w-210 justify-end items-center">
+                <div className="hidden sm:flex flex-1 justify-end sm:mr-8 xl:mr-18 items-center">
                     <a href={agenceUrl} target="_blank" className="cursor-pointer mx-1 sm:mx-4 hover:text-[#4764B2]" rel="noopener noreferrer">
                         <h5 className="uppercase flex text-[14px] sm:text-[18px]"> {t('agence')}</h5>
                     </a>

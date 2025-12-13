@@ -64,7 +64,6 @@ span {
     font-family: 'Open Sans', 'Arial';
     line-height: 1.5;
     letter-spacing: normal;
-    font-size: 12px;
     font-weight: 500;
     color: var(--colors-baseText);
 }
@@ -217,4 +216,19 @@ input[type="radio"]:checked {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* Ajoutez votre bloc @keyframes ici */
+@keyframes scroll-rtl {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Vous devez ensuite créer la classe d'animation manuellement */
+.animate-scroll-rtl {
+    animation: scroll-rtl 5s linear infinite;
 }

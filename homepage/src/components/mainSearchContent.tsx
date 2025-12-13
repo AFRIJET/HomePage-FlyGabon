@@ -19,7 +19,7 @@ const MainSearchContent = () => {
     // --- Définition des options de recherche ---
     const options: { id: string; label: string; icon: any; component: React.ComponentType<any>; }[] = [
         { id: 'flight', label: t('option-reservation'), icon: <i className="fa-solid fa-plane-departure mr-3 lg:text-[20px] xl:text-[25px]"></i>, component: FlightSearchForm },
-        { id: 'reservation', label: t('option-search-reservation'), icon: <PropertySearchIcon size={26} className="mr-2" />, component: FindReservationForm },
+        { id: 'reservation', label: t('option-search-reservation'), icon: <PropertySearchIcon size={26} className="ml-8 md:ml-0 mr-2" />, component: FindReservationForm },
         { id: 'checkin', label: t('option-checkin'), icon: <CheckListIcon size={26} className="mr-2" />, component: CheckInForm },
     ];
 
@@ -135,7 +135,7 @@ const MainSearchContent = () => {
                         key={option.id}
                         onClick={() => setSelectedOption(option.id)}
                         // Classes de base pour tous les onglets
-                        className={`section-option flex items-center flex-1 sm:flex-none justify-center sm:justify-start md:px-8 lg:px-6 xl:px-15 py-3 uppercase cursor-pointer transition text-white
+                        className={`section-option flex items-center flex-1 md:flex-none justify-center md:justify-start md:px-8 lg:px-6 xl:px-15 py-3 uppercase cursor-pointer transition text-white
                             ${option.id === 'flight' ? 'rounded-tl-lg border-r border-gray-600' : ''}
                             ${option.id === 'reservation' ? 'border-r border-gray-600' : ''}
                             ${option.id === 'checkin' ? 'rounded-tr-lg sm:rounded-none' : ''}

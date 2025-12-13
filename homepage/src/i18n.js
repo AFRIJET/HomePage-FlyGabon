@@ -14,10 +14,10 @@ i18n
                     "portugais": "Portugais",
                     "my_account": "Mon compte",
                     "agence": "Nos agences",
-                    "contact": "Nous-Contactez",
+                    "contact": "Nous Contacter",
                     // MainSearchContent
-                    "option-reservation": "Réservez un vol",
-                    "option-search-reservation": "Chercher une réservation",
+                    "option-reservation": "Reserver un vol",
+                    "option-search-reservation": "Chercher une reservation",
                     "option-checkin": "Check-in",
                     // FlightSearchForm
                     "one-way": "Aller simple",
@@ -25,7 +25,7 @@ i18n
                     "multi-route": "Multi-route",
                     "from": "De",
                     "to": "À",
-                    "depart": "DÉPART",
+                    "depart": "DEPART",
                     "return": "RETOUR",
                     "passagers": "passagers",
                     "passager": "Passager",
@@ -153,6 +153,56 @@ i18n
                     "data-protection": "Protección de datos",
                     "mention": "Aviso legal",
                     "condition": "Términos y condiciones"
+                }
+            },
+            pt: {
+                translation: {
+                    // Header
+                    "francais": "Francês",
+                    "anglais": "Inglês",
+                    "espagnol": "Espanhol",
+                    "portugais": "Português",
+                    "my_account": "Minha conta",
+                    "agence": "Nossas agências",
+                    "contact": "Fale Conosco",
+                    // MainSearchContent
+                    "option-reservation": "Reservar voo",
+                    "option-search-reservation": "Buscar reserva",
+                    "option-checkin": "Check-in",
+                    // FlightSearchForm
+                    "one-way": "Só ida",
+                    "roundtrip": "Ida e volta",
+                    "multi-route": "Multirrota",
+                    "from": "De",
+                    "to": "Para",
+                    "depart": "PARTIDA",
+                    "return": "VOLTA",
+                    "passagers": "passageiros",
+                    "passager": "Passageiro",
+                    "search-flight": "Buscar voo",
+                    "adulte": "Adultos",
+                    "enfant": "Crianças",
+                    "bebe": "Bebês",
+                    "desc-adulte": "12 anos ou mais",
+                    "desc-enfant": "2 - 12 anos",
+                    "desc-bebe": "Menos de 2 anos",
+                    // FindReservationForm
+                    "search-reservation": "buscar uma reserva",
+                    "reference-reservation": "referência da reserva",
+                    "nom-famille": "Sobrenome",
+                    "search": "Buscar",
+                    // CheckinForm
+                    "enregistrement": "Check-in",
+                    "numero-ticket": "Número do bilhete",
+                    // DomesticCarousel
+                    "nos-destinations": "Nossos destinos",
+                    "description-destination": "Descubra as paisagens deslumbrantes e a cultura vibrante do Gabão",
+                    "Cameroun": "Camarões",
+                    // Footer
+                    "copyright": "Todos os direitos reservados FlyGabon",
+                    "data-protection": "Proteção de dados",
+                    "mention": "Aviso legal",
+                    "condition": "Termos e condições"
                 }
             }
         },

@@ -1,4 +1,4 @@
-import Logo from "../assets/images/logo-flygabon-black.png";
+import Logo from "../assets/images/logo-flygabon-black.webp";
 import '../styles/mainstyle.css';
 import {
     UserCircleIcon,
@@ -6,10 +6,10 @@ import {
 } from 'hugeicons-react';
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useRef } from "react";
-import flagFR from '/src/assets/images/flag/FR.png';
-import flagGB from '/src/assets/images/flag/GB.png';
-import flagES from '/src/assets/images/flag/ES.png';
-import flagPR from '/src/assets/images/flag/PR.png';
+import flagFR from '/src/assets/images/flag/FR.webp';
+import flagGB from '/src/assets/images/flag/GB.webp';
+import flagES from '/src/assets/images/flag/ES.webp';
+import flagPR from '/src/assets/images/flag/PR.webp';
 
 const lmsUrl = import.meta.env.VITE_URL_LMS;
 const cclUrl = import.meta.env.VITE_URL_CCL;

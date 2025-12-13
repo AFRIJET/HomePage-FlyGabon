@@ -59,7 +59,7 @@ const DestSelectedBox = ({ t, initialValue, onSelect, label, destinationsData }:
             }))
             .filter(countryGroup => countryGroup.cities.length > 0);
     }, [searchTerm, destinationsData]);
-    
+
     const handleSelectCity = (city: City) => {
         setSelectedCity(city);
         setSearchTerm(city.name || '');
@@ -87,12 +87,14 @@ const DestSelectedBox = ({ t, initialValue, onSelect, label, destinationsData }:
         <div className="relative sm:flex-1" ref={dropdownRef}>
             <label
                 className={`absolute top-2 text-xs font-semibold text-gray-500 z-10 ${label === t('from') ? 'left-4' : 'sm:left-8 left-4'}`}
+                htmlFor={label}
             >
                 {label}
             </label>
 
             {/* Input de recherche/affichage */}
             <input
+                id={label}
                 type="text"
                 value={searchTerm}
                 onChange={handleInputChange}

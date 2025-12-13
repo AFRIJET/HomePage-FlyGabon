@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Logo from "../assets/images/logo-Flygabon-white.png";
+import Logo from "../assets/images/logo-Flygabon-white.webp";
 
 const lmsUrl = import.meta.env.VITE_URL_LMS;
 const cclUrl = import.meta.env.VITE_URL_CCL;

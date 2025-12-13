@@ -52,12 +52,14 @@ const CustomDateInput = ({ placeholder, value, onChange, disabled, type }: Props
                         : 'top-1/2 -translate-y-1/2 text-gray-700'  // Statique
                     }
                 `}
+                htmlFor={placeholder}
             >
                 {placeholder}
             </label>
             
             {/* 2. Champ d'Affichage (Input qui ouvre le pop-up) */}
             <input 
+                id={placeholder}
                 type="text" 
                 value={value}
                 readOnly

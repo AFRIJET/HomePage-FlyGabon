@@ -10,10 +10,10 @@ import 'swiper/css/pagination';
 // @ts-ignore: no type declarations for swiper css
 import 'swiper/css/autoplay';
 import { useTranslation } from 'react-i18next';
-import Libreville from '/src/assets/images/dest-libreville.jpg'
-import PortGentil from '/src/assets/images/dest-port-gentil.png'
-import Franceville from '/src/assets/images/dest-franceville.png'
-import Oyem from '/src/assets/images/dest-oyem.png'
+import Libreville from '/src/assets/images/dest-libreville.webp'
+import PortGentil from '/src/assets/images/dest-port-gentil.webp'
+import Franceville from '/src/assets/images/dest-franceville.webp'
+import Oyem from '/src/assets/images/dest-oyem.webp'
 import Douala from '/src/assets/images/dest-douala.webp'
 
 const DomesticCarousel = () => {
@@ -33,13 +33,11 @@ const DomesticCarousel = () => {
     // --- 2. GESTION DU FILTRE ---
     const [activeFilter, setActiveFilter] = useState('All');
 
-    // Détermine la liste unique des pays pour les tags
     const uniqueCountries = useMemo(() => {
         const countries = [...new Set(allSlidesData.map(slide => slide.country))];
         return ['All', ...countries];
     }, []);
 
-    // --- LOGIQUE DE FILTRAGE ---
     const filteredSlides = useMemo(() => {
         if (activeFilter === 'All') {
             return allSlidesData;
@@ -47,7 +45,6 @@ const DomesticCarousel = () => {
         return allSlidesData.filter(slide => slide.country === activeFilter);
     }, [activeFilter]);
 
-    // Fonction de gestion du clic sur les tags
     const handleFilterClick = (country: SetStateAction<string>) => {
         setActiveFilter(country);
     };
@@ -97,12 +94,11 @@ const DomesticCarousel = () => {
 
             {/* 2. Composant Swiper */}
             <Swiper
-                // La clé doit changer lorsque les slides changent pour forcer la réinitialisation de Swiper
                 key={activeFilter}
                 modules={[Navigation, Autoplay]}
                 spaceBetween={30}
                 slidesPerView={3}
-                loop={filteredSlides.length >= 3} // La boucle n'est utile que s'il y a suffisamment de slides
+                loop={filteredSlides.length >= 3}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,

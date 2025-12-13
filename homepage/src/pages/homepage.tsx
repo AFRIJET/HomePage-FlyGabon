@@ -3,7 +3,7 @@ import Header from "../components/header";
 import MainSearchContent from "../components/mainSearchContent";
 import DomesticCarousel from "../components/domesticCarouselImage";
 import Footer from "../components/footer";
-import AvionFlyGabon from '/src/assets/images/bg-plane-flygabon.webp'
+import AvionFlyGabon from '/src/assets/images/bg-plane-flygabon.jpg'
 import AvionFlyGabonFace from '/src/assets/images/bg-plane-flygabon-face.webp'
 import SalonFlyGabon from '/src/assets/images/bg-lounge-flygabon.jpg'
 import OiseauxGabon from '/src/assets/images/bg-oiseaux-gabon.png'
